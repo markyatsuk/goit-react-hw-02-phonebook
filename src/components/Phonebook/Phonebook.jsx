@@ -34,8 +34,6 @@ class Phonebook extends Component {
     });
 
     this.setState(prevState => {
-      contacts.filter(contact => contact.name.includes(name));
-      console.log(isNameAlreadyExists);
       if (isNameAlreadyExists) {
         alert(`${name} is already in contacts`);
         return;
