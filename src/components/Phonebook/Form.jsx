@@ -21,7 +21,9 @@ const Form = ({ onFormSubmit }) => {
           required
         />
         <br />
-        <button type="submit">Add contacts</button>
+        <button type="submit" className={s.form__button}>
+          Add contacts
+        </button>
       </fieldset>
     </form>
   );
