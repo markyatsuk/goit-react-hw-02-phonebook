@@ -15,40 +15,27 @@ class Phonebook extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  addContact = ({ name, number }) => {
     const { contacts } = this.state;
-    const form = e.currentTarget;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-    let isNameAlreadyExists = false;
-
-    contacts.forEach(contact => {
-      if (contact.name === name) {
-        isNameAlreadyExists = true;
-      }
-    });
+    let isNameAlreadyExists = contacts.find(element => element.name === name);
 
     this.setState(prevState => {
       if (isNameAlreadyExists) {
         alert(`${name} is already in contacts`);
         return;
-      } else {
-        return {
-          contacts: [
-            ...prevState.contacts,
-            {
-              name,
-              id: nanoid(),
-              number,
-            },
-          ],
-        };
       }
+      return {
+        contacts: [
+          ...prevState.contacts,
+          {
+            name,
+            id: nanoid(),
+            number,
+          },
+        ],
+      };
     });
   };
 
@@ -80,7 +67,7 @@ class Phonebook extends Component {
     return (
       <div>
         <Section title="Phonebook">
-          <Form onFormSubmit={this.handleSubmit} />
+          <Form onFormSubmit={this.addContact} />
         </Section>
 
         <Section title="Contacts">
